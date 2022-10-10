@@ -10,11 +10,12 @@ crate-type = ["cdylib"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-
-
+reqwest = { version = "0.11", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
+lazy_static = "1.4.0"
 
 
 
 [[example]]
 name = "core" 
-path = "example/core.rs" 
+path = "example/lua/core.rs" 
