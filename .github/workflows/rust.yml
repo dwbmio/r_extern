@@ -9,12 +9,34 @@ on:
       - Cargo.toml 
   
 jobs:
+  lib_build_mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: lib_builid_mac
+        run: |
+          cargo build --release 
 
-  lib_build_all:
+  lib_build_window:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@main
-      - name: lib_build_all
+      - uses: actions/checkout@v3
+      - name: lib_builid_windows
         run: |
           rustup target add i686-pc-windows-msvc
-          cargo build --release --target  --target=i686-pc-windows-msvc
+          cargo build --release --target=i686-pc-windows-msvc
+          
+  upload_all:
+    runs-on: windows-latest
+      needs:[lib_build_mac, lib_build_window]
+    steps:
+      - uses: actions/upload-artifact@v3
+        with:
+          name: lib_win 
+          path: src/target/i686-pc-windows-msvc/release/r_extern.dll
+          
+      - uses: actions/upload-artifact@v3
+        with:
+          name: lib_mac
+          path: src/target/release/r_extern.dylib
+          
