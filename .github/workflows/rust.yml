@@ -10,7 +10,7 @@ on:
 jobs:
 
   lib_build_all:
-    runs-on: macos-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@main
       - name: lib_build_all
