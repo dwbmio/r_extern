@@ -1,17 +1,18 @@
 name: Rust
 
 on:
-  push:
-    branches: [ "release/**" ]
+  pull_request:
+    branches:
+      - main
     paths:
-      - Cargo.toml
+      - Cargo.toml 
   
 jobs:
 
   lib_build_all:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@release/**
+      - uses: actions/checkout@main
       - name: lib_build_all
         run: |
           rustup target add i686-pc-windows-msvc
